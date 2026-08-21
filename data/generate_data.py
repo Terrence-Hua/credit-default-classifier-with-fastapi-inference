@@ -85,16 +85,21 @@ def generate(n: int = 10_000, seed: int = 42) -> pd.DataFrame:
         1.0,
     )
 
+    # Count months with delayed payment (PAY > 0)
+    total_delays = sum((pay_cols[c] > 0).astype(int) for c in pay_cols)
+    severe_delay = (max_delay >= 2).astype(float)
+
     log_odds = (
-        -1.5
-        + 0.7 * (recent_delay > 0).astype(float)
-        + 0.5 * (max_delay > 0).astype(float)
-        + 0.4 * np.clip(recent_delay, 0, 6) / 6
-        + 0.6 * bill_to_limit
-        - 0.8 * np.clip(pay_ratio, 0, 1)
-        - 0.3 * np.log1p(limit_bal / 10_000)
-        + 0.2 * (education >= 3).astype(float)
-        + rng.normal(0, 0.5, size=n)
+        -3.0
+        + 2.5 * (recent_delay > 0).astype(float)
+        + 1.5 * severe_delay
+        + 1.2 * np.clip(recent_delay, 0, 6) / 6
+        + 1.0 * np.clip(total_delays, 0, 6) / 6
+        + 1.5 * bill_to_limit
+        - 2.0 * np.clip(pay_ratio, 0, 1)
+        - 0.5 * np.log1p(limit_bal / 10_000)
+        + 0.4 * (education >= 3).astype(float)
+        + rng.normal(0, 0.3, size=n)
     )
     prob_default = 1 / (1 + np.exp(-log_odds))
     default = (rng.random(n) < prob_default).astype(int)

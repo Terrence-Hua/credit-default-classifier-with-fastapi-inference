@@ -1,0 +1,35 @@
+{
+  "best_model": "gradient_boosting",
+  "cv_results": {
+    "logistic_regression": 0.8730503712968674,
+    "random_forest": 0.8828986314894637,
+    "gradient_boosting": 0.8836809322922111
+  },
+  "holdout_roc_auc": 0.8823619047619046,
+  "train_size": 8000,
+  "test_size": 2000,
+  "features": [
+    "LIMIT_BAL",
+    "AGE",
+    "BILL_AMT1",
+    "BILL_AMT2",
+    "BILL_AMT3",
+    "BILL_AMT4",
+    "BILL_AMT5",
+    "BILL_AMT6",
+    "PAY_AMT1",
+    "PAY_AMT2",
+    "PAY_AMT3",
+    "PAY_AMT4",
+    "PAY_AMT5",
+    "PAY_AMT6",
+    "PAY_0",
+    "PAY_2",
+    "PAY_3",
+    "PAY_4",
+    "PAY_5",
+    "PAY_6",
+    "EDUCATION",
+    "MARRIAGE"
+  ]
+}
