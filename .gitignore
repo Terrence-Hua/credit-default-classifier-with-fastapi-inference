@@ -8,9 +8,10 @@ build/
 venv/
 env/
 .env
-*.joblib
 *.pkl
 !models/.gitkeep
+# track the trained model for deployment
+# models/best_model.joblib is committed intentionally
 .ipynb_checkpoints/
 .ruff_cache/
 .pytest_cache/
